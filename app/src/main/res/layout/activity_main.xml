@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
 
-        <variable
-            name="viewmodel"
-            type="com.example.simpleview.SViewModel" />
-    </data>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="100dp">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
         <TextView
@@ -24,8 +15,8 @@
             android:layout_marginBottom="10dp"
             android:width="200dp"
             android:height="100dp"
+            android:text="0"
             android:background="@color/purple_200"
-            android:text="@{String.valueOf(viewmodel.countText)}"
             android:textSize="70sp" />
 
 
@@ -37,7 +28,6 @@
             android:width="200dp"
             android:height="100dp"
             android:background="@color/black"
-            android:onClick="@{() -> viewmodel.addone()}"
             android:text="add 1"
             android:textSize="40sp" />
 
@@ -48,7 +38,6 @@
             android:width="200dp"
             android:height="100dp"
             android:background="@color/black"
-            android:onClick="@{() -> viewmodel.changeFrag()}"
             android:text="swap"
             android:textSize="40sp" />
 
@@ -60,5 +49,4 @@
 
 
     </LinearLayout>
-</layout>
 
