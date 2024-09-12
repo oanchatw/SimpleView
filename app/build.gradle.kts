@@ -56,6 +56,6 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-//    kapt("com.android.databinding:compiler:3.1.4")
+//    kapt("com.android.databinding:compiler:3.5.0")
 
 }

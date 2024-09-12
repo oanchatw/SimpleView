@@ -1,55 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.simpleview.SViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="100dp">
 
 
+        <TextView
+            android:id="@+id/text_main_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:width="200dp"
+            android:height="100dp"
+            android:background="@color/purple_200"
+            android:text="@{String.valueOf(viewmodel.countText)}"
+            android:textSize="70sp" />
 
 
-    <TextView
-        android:id="@+id/text_main_1"
-        android:background="@color/purple_200"
-        android:height="100dp"
-        android:width="200dp"
-        android:textSize="70sp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/button_main_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:width="200dp"
+            android:height="100dp"
+            android:background="@color/black"
+            android:onClick="@{() -> viewmodel.addone()}"
+            android:text="add 1"
+            android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/button_swap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="200dp"
+            android:height="100dp"
+            android:background="@color/black"
+            android:onClick="@{() -> viewmodel.changeFrag()}"
+            android:text="swap"
+            android:textSize="40sp" />
+
+<!--            <include layout="@layout/content_main" />-->
+        <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_content_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-   <Button
-       android:id="@+id/button_main_1"
-       android:background="@color/black"
-       android:height="100dp"
-       android:width="200dp"
-       android:text="add 1"
-       android:layout_marginBottom="10dp"
-       android:textSize="40sp"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/button_swap"
-        android:background="@color/black"
-        android:height="100dp"
-        android:width="200dp"
-        android:text="swap"
-        android:textSize="40sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-<!--    <include layout="@layout/content_main" />-->
-    <androidx.fragment.app.FragmentContainerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_content_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</layout>
 
