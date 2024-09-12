@@ -69,8 +69,7 @@ class MainActivity : AppCompatActivity() {
    fun drawUI() {
        val text1 = findViewById<TextView>(R.id.text_main_1)
        text1.text=id1.toString()
-       val text2 = findViewById<TextView>(R.id.text_main_2)
-       text2.text=id2.toString()
+
     }
     fun addone() {
         id1+=1;
