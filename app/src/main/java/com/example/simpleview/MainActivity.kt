@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -35,18 +38,19 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-
-
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace(binding.fragmentContentMain.id, FirstFragment())
-
-
+        binding.composeView.apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                // In Compose world
+                MaterialTheme {
+                    CCompose()
+                }
+            }
         }
 
 
-//
-        vModel.swapFrag.observe(this) { swapFragNext(it) }
+
+
 
         vModel.countText.observe(this) {
 
@@ -59,21 +63,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun swapFragNext(isFirst: Boolean) {
-
-        lifecycle.coroutineScope.launch {
-            delay(100)
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-
-                replace(
-                    binding.fragmentContentMain.id,
-                    if (isFirst) FirstFragment() else SecondFragment()
-                )
-            }
-        }
-
-    }
 
 
 }
