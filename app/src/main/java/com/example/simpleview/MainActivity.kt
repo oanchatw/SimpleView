@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.compose.setContent
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
@@ -25,44 +24,100 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    val vModel: SViewModel by lazy { SViewModel() };
+//  lateinit  var vModel: SViewModel
 
+    var count = 1;
 
-    private lateinit var binding: ActivityMainBinding
+    var isFisrtFrag = true;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setContentView(R.layout.activity_main)
 
+        listen()
+        updateUI()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
 
-        setContentView(binding.root)
-
-        binding.composeView.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                // In Compose world
-                MaterialTheme {
-                    CCompose()
-                }
-            }
+            replace(
+                R.id.fragment_content_main,
+                 FirstFragment()
+            )
         }
 
 
+    }
+
+    fun updateUI() {
+        val t1 = findViewById<TextView>(R.id.text_main_1)
 
 
 
-        vModel.countText.observe(this) {
+        t1.text = count.toString()
 
-            binding.textMain1.text = it.toString();
+
+    }
+
+    fun listen() {
+
+        val b1 = findViewById<Button>(R.id.button_add_1)
+
+        b1.setOnClickListener {
+            count++
+
+            updateUI()
         }
 
-        binding.buttonMain1.setOnClickListener { vModel.addone() }
-        binding.buttonSwap.setOnClickListener { vModel.changeFrag() }
+        val b2 = findViewById<Button>(R.id.button_swap)
+
+        b2.setOnClickListener {
+            isFisrtFrag = !isFisrtFrag
+            swapFragNext(isFisrtFrag)
+            updateUI()
+        }
 
     }
 
 
+    private fun swapFragNext(isFirst: Boolean) {
+
+        lifecycle.coroutineScope.launch {
+            delay(100)
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+
+                replace(
+                    R.id.fragment_content_main,
+                    if (isFirst) FirstFragment() else SecondFragment()
+                )
+            }
+        }
+
+    }
 
 
 }
+
+//        supportFragmentManager.commit {
+//            setReorderingAllowed(true)
+//            replace(R.id.fragment_content_main, FirstFragment())
+//
+//
+//        }
+
+//
+//        vModel.swapFrag.observe(this) { swapFragNext(it) }
+//
+//        vModel.countText.observe(this) {
+//
+//          val p=   findViewById<TextView>(R.id.text_main_1)
+//
+//            p.text = it.toString();
+//        }
+//        val b1=   findViewById<TextView>(R.id.button_main_1)
+//
+//        b1.setOnClickListener { vModel.addone() }
+//        val b2=   findViewById<TextView>(R.id.button_swap)
+//        b2.setOnClickListener { vModel.changeFrag() }

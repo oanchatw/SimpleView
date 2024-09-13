@@ -21,7 +21,7 @@
 
 
         <Button
-            android:id="@+id/button_main_1"
+            android:id="@+id/button_add_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -42,10 +42,10 @@
             android:textSize="40sp" />
 
 <!--            <include layout="@layout/content_main" />-->
-    <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/compose_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_content_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>
