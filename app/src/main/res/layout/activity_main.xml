@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-
-        <variable
-            name="vm"
-            type="com.example.simpleview.SViewModel" />
-
-    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
-        >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
         <TextView
@@ -26,7 +17,7 @@
             android:layout_marginBottom="10dp"
             android:width="200dp"
             android:height="100dp"
-            android:text="@{String.valueOf( vm.countText)}"
+            android:text="0"
             android:background="@color/purple_200"
             android:textSize="70sp" />
 
@@ -40,7 +31,7 @@
             android:height="100dp"
             android:background="@color/black"
             android:text="add 1"
-            android:onClick="@{() -> vm.addone()}"
+
             android:textSize="40sp" />
 
         <Button
@@ -51,7 +42,6 @@
             android:height="100dp"
             android:background="@color/black"
             android:text="swap"
-            android:onClick="@{() -> vm.changeFrag()}"
             android:textSize="40sp" />
 
         <!--            <include layout="@layout/content_main" />-->
@@ -62,7 +52,8 @@
 
 
     </LinearLayout>
-</layout>
+
+
 
 <!--<androidx.compose.ui.platform.ComposeView-->
 <!--android:id="@+id/compose_view"-->
