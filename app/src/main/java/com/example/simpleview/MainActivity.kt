@@ -24,19 +24,20 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-//  lateinit  var vModel: SViewModel
+  lateinit  var vModel: SViewModel
 
-    var count = 1;
-
-    var isFisrtFrag = true;
-
+    lateinit  var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
 
-        listen()
-        updateUI()
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        vModel = ViewModelProvider.create(this).get(SViewModel::class)
+        binding.vm = vModel
+
+        binding.lifecycleOwner =this
+
+        vModel.swapFrag.observe(this) { swapFragNext(it) }
 
         supportFragmentManager.commit {
             setReorderingAllowed(true)
@@ -50,35 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun updateUI() {
-        val t1 = findViewById<TextView>(R.id.text_main_1)
-
-
-
-        t1.text = count.toString()
-
-
-    }
-
-    fun listen() {
-
-        val b1 = findViewById<Button>(R.id.button_add_1)
-
-        b1.setOnClickListener {
-            count++
-
-            updateUI()
-        }
-
-        val b2 = findViewById<Button>(R.id.button_swap)
-
-        b2.setOnClickListener {
-            isFisrtFrag = !isFisrtFrag
-            swapFragNext(isFisrtFrag)
-            updateUI()
-        }
-
-    }
 
 
     private fun swapFragNext(isFirst: Boolean) {
