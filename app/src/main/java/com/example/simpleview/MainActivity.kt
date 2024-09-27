@@ -100,12 +100,6 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-//        supportFragmentManager.commit {
-//            setReorderingAllowed(true)
-//            replace(R.id.fragment_content_main, FirstFragment())
-//
-//
-//        }
 
 //
 //        vModel.swapFrag.observe(this) { swapFragNext(it) }
@@ -121,3 +115,16 @@ class MainActivity : AppCompatActivity() {
 //        b1.setOnClickListener { vModel.addone() }
 //        val b2=   findViewById<TextView>(R.id.button_swap)
 //        b2.setOnClickListener { vModel.changeFrag() }
+
+
+
+//compose binding
+//binding.composeView.apply {
+//    setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+//    setContent {
+//        // In Compose world
+//        MaterialTheme {
+//            CCompose()
+//        }
+//    }
+//}
