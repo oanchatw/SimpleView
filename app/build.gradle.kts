@@ -38,7 +38,7 @@ android {
     }
     buildFeatures {
 //        viewBinding = true
-//        dataBinding = true
+        dataBinding = true
 
         compose = true
     }
@@ -56,7 +56,6 @@ android {
 //}
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -69,6 +68,7 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.androidx.lifecycle.process)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.activity.compose)

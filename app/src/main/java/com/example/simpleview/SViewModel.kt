@@ -1,5 +1,8 @@
 package com.example.simpleview
 
+import android.view.View
+import android.widget.CompoundButton
+import androidx.databinding.Bindable
 import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,10 +20,18 @@ class SViewModel : ViewModel() {
         MutableLiveData<Boolean>()
     }
 
+
+
+
     val swapFrag: LiveData<Boolean> = _swapFrag
         fun setCount(cou:Int) {
             _countText.value = cou
         }
+
+
+    val userName: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     fun addone() {
 
@@ -32,11 +43,18 @@ class SViewModel : ViewModel() {
 
     }
 
+
+
     fun changeFrag() {
         _swapFrag.value = !(_swapFrag.value ?: true)
 
 
     }
+
+
+
+
+
 
 
 }
