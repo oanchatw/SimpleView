@@ -4,12 +4,22 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.delayEach
+import kotlinx.coroutines.flow.delayFlow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.timeout
+import kotlinx.coroutines.launch
 
 class SViewModel : ViewModel() {
 
     private val _countText: MutableLiveData<Int> by lazy {
         MutableLiveData<Int>(0)
     }
+
 
     val countText: LiveData<Int> = _countText
 

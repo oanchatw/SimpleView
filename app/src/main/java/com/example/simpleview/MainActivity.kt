@@ -16,25 +16,38 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.simpleview.databinding.ActivityMainBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
 
-//    lateinit var vModel: SViewModel
+    lateinit var vModel: SViewModel
 
-    var count = 1;
 
-    var isFisrtFrag = true;
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        vModel = ViewModelProvider.create(this).get(SViewModel::class)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        listen()
-        updateUI()
+
+        vModel.swapFrag.observe(this) {
+
+            swapFragNext(it)
+        }
+
+        binding.buttonAdd1.setOnClickListener { vModel.addone() }
+        binding.buttonSwap.setOnClickListener { vModel.changeFrag() }
+
+        vModel.countText.observe(this) {
+
+            binding.textMain1.text = it.toString()
+        }
 
 
         supportFragmentManager.commit {
@@ -49,36 +62,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    fun updateUI() {
-        val t1 = findViewById<TextView>(R.id.text_main_1)
-
-
-
-        t1.text = count.toString()
-
-
-    }
-
-    fun listen() {
-
-        val b1 = findViewById<Button>(R.id.button_add_1)
-
-        b1.setOnClickListener {
-            count++
-
-            updateUI()
-        }
-
-        val b2 = findViewById<Button>(R.id.button_swap)
-
-        b2.setOnClickListener {
-            isFisrtFrag = !isFisrtFrag
-            swapFragNext(isFisrtFrag)
-            updateUI()
-        }
-
-    }
 
 
     private fun swapFragNext(isFirst: Boolean) {
@@ -115,7 +98,6 @@ class MainActivity : AppCompatActivity() {
 //        b1.setOnClickListener { vModel.addone() }
 //        val b2=   findViewById<TextView>(R.id.button_swap)
 //        b2.setOnClickListener { vModel.changeFrag() }
-
 
 
 //view binding
